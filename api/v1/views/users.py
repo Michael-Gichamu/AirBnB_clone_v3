@@ -9,6 +9,16 @@ from flask import abort, jsonify, make_response, request
 from models.user import User
 
 
+@app_views.route('/users', methods=['GET'],
+                 strict_slashes=False)
+def get_users():
+    users_list = []
+    users = storage.all(User)
+    for user in users.values():
+        users_list.append(user.to_dict())
+    return jsonify(users_list)
+
+
 @app_views.route('/users/<user_id>', methods=['GET'],
                  strict_slashes=False)
 def get_user(user_id):
@@ -70,5 +80,5 @@ def update_user(user_id):
     for key, value in data.items():
         if key not in ignore_keys:
             setattr(user, key, value)
-    user.save()
+    storage.save()
     return make_response(jsonify(user.to_dict()), 200)
