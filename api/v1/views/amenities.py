@@ -44,9 +44,9 @@ def create_amenity():
     """ Creates a Amenity """
     data = request.get_json()
     if data is None:
-        abort(404, description='Not a JSON')
+        abort(400, description='Not a JSON')
     if 'name' not in data:
-        abort(404, description='Missing name')
+        abort(400, description='Missing name')
     amenity = Amenity(**data)
     storage.save()
     return make_response(jsonify(amenity.to_dict()), 201)
@@ -61,7 +61,7 @@ def update_amenity(amenity_id):
         abort(404)
     data = request.get_json()
     if data is None:
-        abort(404, description='Not a JSON')
+        abort(400, description='Not a JSON')
     static_keys = ['id', 'created_at', 'updated_at']
     for key, val in data.items():
         if key not in static_keys:
