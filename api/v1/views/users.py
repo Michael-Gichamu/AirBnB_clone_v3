@@ -60,7 +60,7 @@ def create_user():
     if 'password' not in data:
         abort(400, description='Missing password')
     user = User(**data)
-    user.save()
+    storage.save()
     return make_response(jsonify(user.to_dict()), 200)
 
 
