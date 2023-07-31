@@ -75,5 +75,5 @@ def update_review(review_id):
     for key, value in data.items():
         if key not in ignore_keys:
             setattr(review, key, value)
-    review.save()
+    storage.save()
     return make_response(jsonfiy(review.to_dict()), 200)   
