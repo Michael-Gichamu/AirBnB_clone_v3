@@ -61,7 +61,7 @@ def create_user():
         abort(400, description='Missing password')
     user = User(**data)
     storage.save()
-    return make_response(jsonify(user.to_dict()), 200)
+    return make_response(jsonify(user.to_dict()), 201)
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'],
