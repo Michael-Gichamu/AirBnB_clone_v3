@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+View for Review object that handles all default RESTFul API actions
+"""
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from models import storage
@@ -25,6 +28,9 @@ def get_reviews(place_id):
 @app_views.route('/reviews/<review_id>', methods=['GET'],
                  strict_slashes=False)
 def get_review(review_id):
+    """
+    Retrieves the list of Review object
+    """
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
@@ -34,6 +40,9 @@ def get_review(review_id):
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
 def delete_review(review_id):
+    """
+    Deletes review object
+    """
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
@@ -45,6 +54,9 @@ def delete_review(review_id):
 @app_views.route('/places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
 def post_review(place_id):
+    """
+    Create a review object
+    """
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -66,6 +78,9 @@ def post_review(place_id):
 @app_views.route('/reviews/<review_id>', methods=['PUT'],
                  strict_slashes=False)
 def update_review(review_id):
+    """
+    Update review object
+    """
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
