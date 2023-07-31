@@ -57,6 +57,7 @@ def post_review(place_id):
         abort(400)
     if 'text' not in data:
         abort(400, description="Missing text")
+    data['place_id'] = place_id
     review = Review(**data)
     review.save()
     return make_response(jsonify(review.to_dict()), 201)
@@ -76,4 +77,4 @@ def update_review(review_id):
         if key not in ignore_keys:
             setattr(review, key, value)
     storage.save()
-    return make_response(jsonfiy(review.to_dict()), 200)   
+    return make_response(jsonify(review.to_dict()), 200)
