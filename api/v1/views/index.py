@@ -11,7 +11,7 @@ from models.user import User
 from models.review import Review
 
 
-clss_obj = {'amenties': Amenity, 'cities': City,
+clss_obj = {'amenities': Amenity, 'cities': City,
             'places': Place, 'reviews': Review, 'states': State, 'users': User}
 
 
